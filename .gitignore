@@ -1,0 +1,14 @@
+# Terraform local/provider files
+terraform/.terraform/
+
+# Terraform state
+terraform/*.tfstate
+terraform/*.tfstate.*
+
+# Terraform crash logs
+terraform/crash.log
+terraform/crash.*.log
+
+# Terraform variable files that may contain secrets later
+terraform/*.tfvars
+terraform/*.tfvars.json
