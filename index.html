@@ -179,18 +179,27 @@
       object-position: center;
     }
 
-    .hero p,
+    .hero-copy,
     .home-section {
       width: min(1120px, calc(100% - 32px));
       margin-right: auto;
       margin-left: auto;
     }
 
-    .hero p {
+    .hero-copy {
       margin-top: 28px;
     }
 
-    .hero-intro {
+    .hero-copy p {
+      max-width: none;
+      margin: 0 auto 20px;
+    }
+
+    .hero-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero-copy {
       text-align: center;
     }
 
@@ -339,7 +348,7 @@
           <ul class="dropdown-menu" aria-label="Shows">
             <li><a href="just-tangents.html">Just Tangents</a></li>
             <li><a href="just-dice.html">Just Dice</a></li>
-            <li><a href="one-shots.html">One Shots</a></li>
+            <li><a href="just-dice.html#one-shots">One Shots</a></li>
           </ul>
         </li>
         <li><a class="nav-link" href="contact.html">Contact</a></li>
@@ -350,7 +359,9 @@
   <main id="home">
     <section class="hero">
       <img class="hero-logo" src="img/No%20Plan%20Banner.jpg" alt="No Plan Just Entertainment banner">
-      <p class="hero-intro">No Plan Just Entertainment is a group of creators, storytellers, and friends making shows built around chaotic ideas, tabletop adventures, and conversations that go wherever they want. This space will soon hold the real story behind the crew.</p>
+      <div class="hero-copy">
+        <p>Well, I was tasked with writing what No Plan Just Entertainment is, and to be honest, the whole premise is 4 friends being friends, talking about and doing stuff we like to do. It's grown a lot from a D&amp;D podcast to doing live interviews, and now vending at conventions and having guest stars on. The goal is to stay us—to not be overproduced, but just 4 guys talking to strangers, meeting cool people, and selling cheap anime-inspired merch. This is literally a company made to have fun and keep us engaged in the things we love doing. If we can entertain people along the way and build a community around those same interests, even better. I can say that none of you know what's coming next with us, because even we don't!</p>
+      </div>
     </section>
 
     <section class="home-section" aria-labelledby="events-title">
