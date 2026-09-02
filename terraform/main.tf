@@ -1,6 +1,14 @@
 terraform {
   required_version = ">= 1.5.0"
 
+  backend "azurerm" {
+    resource_group_name = "rg-tfstate-npje"
+    storage_account_name = "npjeterraformstate"
+    container_name = "tfstate"
+    key = "npje.tfstate"
+    use_azuread_auth = true
+  }
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
