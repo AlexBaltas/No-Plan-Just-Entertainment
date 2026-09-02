@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>No Plan Just Entertainment</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101014;
+      --nav: #17171d;
+      --nav-border: #2b2b34;
+      --text: #f5f3ee;
+      --muted: #c7c1b8;
+      --accent: #e64c3c;
+      --accent-soft: rgba(230, 76, 60, 0.16);
+      --focus: #f0b34f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--nav-border);
+      background: var(--nav);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      width: min(1120px, calc(100% - 32px));
+      min-height: 72px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-link,
+    .dropdown-trigger {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible,
+    .dropdown:focus-within .dropdown-trigger,
+    .dropdown:hover .dropdown-trigger {
+      background: var(--accent-soft);
+      color: var(--text);
+      outline: none;
+    }
+
+    .nav-link:focus-visible,
+    .dropdown-trigger:focus-visible,
+    .dropdown-menu a:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-trigger::after {
+      width: 0;
+      height: 0;
+      margin-left: 8px;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+      border-top: 5px solid currentColor;
+      content: "";
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      display: grid;
+      min-width: 190px;
+      margin: 0;
+      padding: 8px;
+      border: 1px solid var(--nav-border);
+      border-radius: 8px;
+      background: #1f1f27;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.3);
+      list-style: none;
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 11px 12px;
+      border-radius: 6px;
+      color: var(--muted);
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu a:focus-visible {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    main {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 0 72px;
+    }
+
+    .hero-logo {
+      display: block;
+      width: 100%;
+      height: clamp(220px, 34vw, 430px);
+      margin: 0;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-copy,
+    .home-section {
+      width: min(1120px, calc(100% - 32px));
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .hero-copy {
+      margin-top: 28px;
+    }
+
+    .hero-copy p {
+      max-width: none;
+      margin: 0 auto 20px;
+    }
+
+    .hero-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero-copy {
+      text-align: center;
+    }
+
+    p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .home-section {
+      padding: 56px 0;
+      border-top: 1px solid var(--nav-border);
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      color: var(--text);
+      font-size: 1.8rem;
+      line-height: 1.1;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .section-title.centered {
+      text-align: center;
+    }
+
+    .video-embed {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin-top: 22px;
+      overflow: hidden;
+      border: 1px solid var(--nav-border);
+      border-radius: 8px;
+      background: #000;
+    }
+
+    .video-embed iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .event-card {
+      min-height: 170px;
+      padding: 22px;
+      border: 1px solid var(--nav-border);
+      border-radius: 8px;
+      background: #17171d;
+    }
+
+    .event-date {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .event-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .event-card p {
+      margin: 0;
+      font-size: 0.98rem;
+    }
+
+    .event-location {
+      display: inline-block;
+      margin: 0 0 10px;
+      color: var(--text);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .event-location:hover,
+    .event-location:focus-visible {
+      color: var(--focus);
+      outline: none;
+    }
+
+    .event-type {
+      margin-bottom: 10px;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .event-description {
+      color: var(--muted);
+    }
+
+    @media (max-width: 720px) {
+      .navbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px 0;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
+      .nav-link,
+      .dropdown-trigger {
+        padding: 0 10px;
+        font-size: 0.9rem;
+      }
+
+      .dropdown-menu {
+        right: auto;
+        left: 0;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Primary navigation">
+      <a class="brand" href="#home">
+        <img class="brand-logo" src="img/No%20plan%20official%20logo.png" alt="">
+        <span>No Plan Just Entertainment</span>
+      </a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="#home">Home</a></li>
+        <li><a class="nav-link" href="about.html">About</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="true">Shows</button>
+          <ul class="dropdown-menu" aria-label="Shows">
+            <li><a href="just-tangents.html">Just Tangents</a></li>
+            <li><a href="just-dice.html">Just Dice</a></li>
+            <li><a href="just-dice.html#one-shots">One Shots</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <img class="hero-logo" src="img/No%20Plan%20Banner.jpg" alt="No Plan Just Entertainment banner">
+      <div class="hero-copy">
+        <p>Well, I was tasked with writing what No Plan Just Entertainment is, and to be honest, the whole premise is 4 friends being friends, talking about and doing stuff we like to do. It's grown a lot from a D&amp;D podcast to doing live interviews, and now vending at conventions and having guest stars on. The goal is to stay us—to not be overproduced, but just 4 guys talking to strangers, meeting cool people, and selling cheap anime-inspired merch. This is literally a company made to have fun and keep us engaged in the things we love doing. If we can entertain people along the way and build a community around those same interests, even better. I can say that none of you know what's coming next with us, because even we don't!</p>
+      </div>
+    </section>
+
+    <section class="home-section" aria-labelledby="events-title">
+      <h2 class="section-title centered" id="events-title">Come see us at an event near you!</h2>
+      <div class="events-grid">
+        <article class="event-card">
+          <p class="event-date">August 29-30, 2026</p>
+          <h3>Anime Conclave 2026</h3>
+          <a class="event-location" href="https://www.google.com/maps/search/?api=1&query=29.947667,-90.063971">Hilton New Orleans Riverside, New Orleans, LA</a>
+          <p class="event-type">Anime Convention with Gaming and Video Gaming programming</p>
+          <p class="event-description">Anime Conclave is a new and upcoming anime, gaming, and pop culture convention in New Orleans celebrating the things that make us different as individuals.</p>
+        </article>
+        <article class="event-card">
+          <p class="event-date">September 26, 2026</p>
+          <h3>Peli Con 2026</h3>
+          <a class="event-location" href="https://www.google.com/maps/search/?api=1&query=30.4950437,-90.9204425">Anthony Dugas Recreation Center, Denham Springs, LA</a>
+          <p class="event-type">Comic Convention</p>
+          <p class="event-description">Family fun for comics, gaming, art, cards, collectibles, cosplay, video games, doodles, panels, food, and more.</p>
+        </article>
+        <article class="event-card">
+          <p class="event-date">December 5-6, 2026</p>
+          <h3>Cajun Con 2026</h3>
+          <a class="event-location" href="https://www.google.com/maps/search/?api=1&query=30.1971354,-90.9577521">Lamar-Dixon Expo Center, Gonzales, LA</a>
+          <p class="event-type">Media Convention with Anime, Comics, Fantasy, Horror, and Sci-Fi programming</p>
+          <p class="event-description">Cajun Con is being created by Scott Innes, a multi award-winning radio personality, concert and events promoter, and voice actor.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-section" aria-labelledby="latest-video-title">
+      <h2 class="section-title centered" id="latest-video-title">Check out our latest video here!</h2>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/g8mtaPzptVk" title="Latest No Plan Just Entertainment video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

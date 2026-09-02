@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About | No Plan Just Entertainment</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101014;
+      --nav: #17171d;
+      --nav-border: #2b2b34;
+      --text: #f5f3ee;
+      --muted: #c7c1b8;
+      --accent: #e64c3c;
+      --accent-soft: rgba(230, 76, 60, 0.16);
+      --focus: #f0b34f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--nav-border);
+      background: var(--nav);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      width: min(1120px, calc(100% - 32px));
+      min-height: 72px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-link,
+    .dropdown-trigger {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 6px;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible,
+    .dropdown:focus-within .dropdown-trigger,
+    .dropdown:hover .dropdown-trigger {
+      background: var(--accent-soft);
+      color: var(--text);
+      outline: none;
+    }
+
+    .nav-link:focus-visible,
+    .dropdown-trigger:focus-visible,
+    .dropdown-menu a:focus-visible,
+    .faq-item summary:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-trigger::after {
+      width: 0;
+      height: 0;
+      margin-left: 8px;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+      border-top: 5px solid currentColor;
+      content: "";
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      display: grid;
+      min-width: 190px;
+      margin: 0;
+      padding: 8px;
+      border: 1px solid var(--nav-border);
+      border-radius: 8px;
+      background: #1f1f27;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.3);
+      list-style: none;
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 11px 12px;
+      border-radius: 6px;
+      color: var(--muted);
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu a:focus-visible {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 72px 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: 0;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    p {
+      max-width: 660px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .page-section {
+      padding: 56px 0;
+      border-top: 1px solid var(--nav-border);
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      color: var(--text);
+      font-size: 1.8rem;
+      line-height: 1.1;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .owners-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .owner-card {
+      min-height: 210px;
+      padding: 24px;
+      border: 1px solid var(--nav-border);
+      border-radius: 8px;
+      background: #17171d;
+    }
+
+    .owner-card h3 {
+      margin: 0 0 12px;
+      color: var(--text);
+      font-size: 1.45rem;
+      line-height: 1.2;
+    }
+
+    .owner-photo {
+      display: block;
+      width: 100%;
+      height: 360px;
+      margin: 0 0 22px;
+      border-radius: 6px;
+      object-fit: cover;
+      object-position: center 38%;
+    }
+
+    .owner-photo-bryce {
+      object-position: center 18%;
+    }
+
+    .owner-card p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .owner-card p + p {
+      margin-top: 12px;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--nav-border);
+      border-radius: 8px;
+      background: #17171d;
+    }
+
+    .faq-item summary {
+      padding: 18px 20px;
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .faq-item p {
+      margin: 0;
+      padding: 0 20px 20px;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 720px) {
+      .navbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px 0;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
+      .nav-link,
+      .dropdown-trigger {
+        padding: 0 10px;
+        font-size: 0.9rem;
+      }
+
+      .dropdown-menu {
+        right: auto;
+        left: 0;
+      }
+
+      .owners-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Primary navigation">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="img/No%20plan%20official%20logo.png" alt="">
+        <span>No Plan Just Entertainment</span>
+      </a>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="about.html">About</a></li>
+        <li class="dropdown">
+          <button class="dropdown-trigger" type="button" aria-haspopup="true">Shows</button>
+          <ul class="dropdown-menu" aria-label="Shows">
+            <li><a href="just-tangents.html">Just Tangents</a></li>
+            <li><a href="just-dice.html">Just Dice</a></li>
+            <li><a href="just-dice.html#one-shots">One Shots</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Who are We?</h1>
+    </section>
+
+    <section class="page-section" aria-labelledby="owners-title">
+      <h2 class="section-title" id="owners-title">Owners</h2>
+      <div class="owners-grid">
+        <article class="owner-card">
+          <img class="owner-photo" src="img/matthew-jobborn.png" alt="Matthew Jobborn">
+          <h3>Meet Matthew Jobborn</h3>
+          <p>I'm Matthew Jobborn, one of the founders and the operator of No Plan Just Entertainment.</p>
+          <p>I've been hooked on anime since I was five years old, and after that there was no turning back. If it was nerdy, I was into it - anime, manga, comics, video games... you name it. Those hobbies have always been a huge part of who I am.</p>
+          <p>As I got older, life got busier. I spent nearly a decade helping build and run other people's businesses, and somewhere along the way I realized I wasn't making time for the things I actually loved anymore. After one particularly rough week, I decided it was time to build something of my own.</p>
+          <p>I called up my four closest friends and said, "Let's start a podcast."</p>
+          <p>That one decision snowballed into something way bigger than any of us expected. We started with a D&amp;D podcast, then expanded into live interviews at anime and comic conventions. Those interviews introduced us to incredible people, which led to our second show, No Plan Just Tangents. Before long, we were buying a CNC machine, making our own products, and vending at conventions all over.</p>
+          <p>Honestly... I still laugh because this whole thing started as a D&amp;D podcast.</p>
+          <p>If you've met me, you already know I'm a little random, a little impulsive, and I tend to move fast. I love trying new ideas, making cool stuff, and connecting with people who are just as passionate about this community as I am.</p>
+          <p>At the end of the day, that's what No Plan Just Entertainment is all about: creating things we love, meeting awesome people, and having a damn good time doing it.</p>
+        </article>
+        <article class="owner-card">
+          <img class="owner-photo owner-photo-bryce" src="img/bryce.png" alt="Bryce">
+          <h3>Meet Bryce</h3>
+          <p>I'm Bryce Trum, co-founder and chief editor of No Plan Just Entertainment.</p>
+          <p>Since I could remember, being nerdy has been my lifestyle. I can attribute some of this to my father as he grew up loving arcade games and, in turn, bought my brother and I our first console one Christmas. A PlayStation 2 with MX vs. ATV: Unleashed. Immediately I was hooked on playing video games and loved how many were available to play. One thing led to another and now I own my own PC with tons of games in my steam library, and other assorted online marketplaces.</p>
+          <p>Different from the other co-founders, I have never been too much into Anime or high fantasy. I loved cartoons but I grew up on the old but gold, and I didn't enjoy the luxury of cable for a good chunk of childhood. I was, however, much more into the competitive, or otherwise, first-person shooter games. Halo, Call of Duty, Siege, you name it, I was playing it. I did dabble in other areas such as Fable or Infamous, and recently I have been enjoying taking a step back from the fps scene to enjoy games that were more curated for a great story and interactive play experience. As well as picking up a few Anime's on the way, with the help of the fellow founders, so as not to watch some absolutely abhorrent shows (you know what I'm talking about).</p>
+          <p>In person you'll find me yapping about the latest Star Wars, or how they've destroyed some of the franchises that I love (I'm looking at you Halo Studios). That being said, I'm also someone you'll find who will listen, and learn. I've realized through this journey just how much there is to offer in this world that I have stepped in. The people are kind and passionate, and it certainly inspires me to widen my horizon. Which I think is the crux of why we do this. To live and learn, to spread love and be merry, and having a medium that we can all speak through to each other.</p>
+        </article>
+        <article class="owner-card">
+          <img class="owner-photo" src="img/addison.png" alt="Addison">
+          <h3>Meet Addison</h3>
+          <p>I'm a silly little guy who loves games, anime and general pop culture! I love all of yall and I hope to see yall at our cons! :)</p>
+        </article>
+        <article class="owner-card">
+          <img class="owner-photo" src="img/alex.png" alt="Alex">
+          <h3>Meet Alex</h3>
+          <p>Hey! I'm Alex, one of the crew behind No Plan Just Entertainment.</p>
+          <p>I'm the resident tech nerd of the group. By day I work in IT, but outside of work you'll usually find me talking about anime, gaming, Dungeons &amp; Dragons, fantasy books, or whatever new obsession has grabbed my attention.</p>
+          <p>One of my favorite parts of conventions is meeting people who are just as passionate about their hobbies as I am. Whether we're talking about a favorite series, showing off cool finds, or just nerding out over something random, I'm always happy to chat.</p>
+          <p>Thanks for stopping by, and I hope we get a chance to meet you at a convention!</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="page-section" aria-labelledby="faq-title">
+      <h2 class="section-title" id="faq-title">FAQs</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>What is No Plan Just Entertainment?</summary>
+          <p>No Plan Just Entertainment is a group of friends who love creating content around the things we're passionate about. From podcasts and convention interviews to original products and live events, our goal is simple: have fun, celebrate nerd culture, and build a community where everyone feels welcome. If you love anime, gaming, comics, tabletop games, or pop culture, you'll fit right in.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Where can I watch the shows?</summary>
+          <p>You can catch all of our content on YouTube, along with audio versions of our podcasts on your favorite podcast platforms (Coming soon!). We also post clips, updates, convention content, and behind-the-scenes moments across our social media channels, so be sure to follow us wherever you hang out online.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can we book you for an event?</summary>
+          <p>Absolutely! Whether you're organizing a convention, community event, podcast, or live show, we'd love to talk. We offer interviews, live hosting, panel appearances, and other collaborations. Reach out through our contact page or Instagram, and we'll get back to you as soon as we can.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How can I support the crew?</summary>
+          <p>The best way to support us is by watching our content, sharing it with friends, and following us on social media. If you'd like to go a step further, check out our merch, support us on Patreon (Coming soon), or stop by our booth at conventions. Every view, share, purchase, and conversation helps us keep creating the content we love.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
